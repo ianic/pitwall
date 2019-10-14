@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/minus5/pitwall/deploy"
 	_ "github.com/minus5/svckit/dcy/lazy"
 
@@ -20,6 +21,12 @@ var deployCmd = &cobra.Command{
 		if len(args) == 1 {
 			service = args[0]
 		}
+
+		// temporary (hopefully) fix for consul address
+		if !rootCmd.Flags().Changed("consul") && dep != "s2" {
+			consul = fmt.Sprintf("http://%s-consul.dev.minus5.hr:8500", dep)
+		}
+
 		deploy.Run(dep, service, path, registry, image, noGit, consul, dryRun)
 	},
 }
