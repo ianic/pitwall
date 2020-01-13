@@ -1,0 +1,29 @@
+federated_dcs: datacenter1 datacenter2
+datacenters:
+    datacenter1:
+        services:
+            service_test1:
+                image: service_test1_image
+                count: 1
+                hostgroup: app
+                node: app1
+                cpu: 64
+                mem: 128
+                env:
+                    env_var1: "env_var1_set"
+                    env_var2: "env_var2_set"
+                    env-var3: "env-var3_set"
+                    envCamelCase: "envCamelCase_set"
+                    ENV_UPPERCASE: "ENV_UPPERCASE_set"
+                arg: ["-argument", "argument_set", "-argument_var1", "argument_var1_set"]
+            service_test2:
+                image: service_test2_image
+                count: 2
+                hostgroup: svc
+    datacenter2: {}
+    datacenter3:
+        services:
+            service_test2:
+                image: service_test2_image
+                count: 2
+                hostgroup: svc

@@ -371,10 +371,13 @@ func (d *Deployer) validate() error {
 			if !(ta.Name == d.service || ta.Name == "service") {
 				continue
 			}
+
+			// set image
 			ta.Config["image"] = d.image
 			s.Image = d.image
 			log.S("image", s.Image).Debug("setting")
 
+			// set resources
 			if s.CPU != 0 {
 				ta.Resources.CPU = &s.CPU
 				log.I("cpu", s.CPU).Debug("setting")
@@ -383,6 +386,14 @@ func (d *Deployer) validate() error {
 				ta.Resources.MemoryMB = &s.Memory
 				log.I("memory", s.Memory).Debug("setting")
 			}
+
+			// replace arguments
+			if len(s.Arguments) > 0 {
+				log.I("args_len", len(s.Arguments)).Debug("setting")
+				ta.Config["args"] = s.Arguments
+			}
+
+			// set environment variables
 			if d.config.FederatedDcs != "" {
 				ta.Env[FederatedDcsEnv] = d.config.FederatedDcs
 			}
