@@ -71,4 +71,9 @@ func TestLoadServiceParams(t *testing.T) {
 	assert.Equal(t, "argument_set", svc.Arguments[1])
 	assert.Equal(t, "-argument_var1", svc.Arguments[2])
 	assert.Equal(t, "argument_var1_set", svc.Arguments[3])
+
+	// check volumes
+	assert.Len(t, svc.Volumes, 2)
+	assert.Equal(t, "name-of-the-volume1:/path/in/container1", svc.Volumes[0])
+	assert.Equal(t, "name-of-the-volume2:/path/in/container2", svc.Volumes[1])
 }

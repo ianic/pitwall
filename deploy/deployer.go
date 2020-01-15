@@ -407,6 +407,11 @@ func (d *Deployer) validate() error {
 				}
 			}
 
+			// replace volumes
+			if len(s.Volumes) > 0 {
+				log.I("vol_len", len(s.Volumes)).Debug("setting")
+				ta.Config["volumes"] = s.Volumes
+			}
 		}
 	}
 
