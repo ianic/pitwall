@@ -124,6 +124,7 @@ type ServiceConfig struct {
 	Memory      int               `yaml:"mem,omitempty"`
 	Environment map[string]string `yaml:"env,omitempty"`
 	Arguments   []string          `yaml:"arg,omitempty"`
+	Volumes     []string          `yaml:"vol,omitempty"`
 }
 
 // Save changes to config.yml
