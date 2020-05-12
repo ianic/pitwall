@@ -22,9 +22,9 @@ builds:
 #     owner: minus5
 #     name: homebrew-tap
 
-brew:
+brews:
   # Repository to push the tap to.
-  github:
+- github:
     owner: minus5
     name: homebrew-tap
 
