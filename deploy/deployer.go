@@ -358,6 +358,13 @@ func (d *Deployer) validate() error {
 		d.job.Constrain(api.NewConstraint("${meta.node}", "=", s.Node))
 	}
 
+	if len(s.Constraints) > 0 {
+		for _, v := range s.Constraints {
+			log.Debug("setting constraint - att: %s, op: %s, v: %s", v.Attribute, v.Operator, v.Value)
+			d.job.Constrain(api.NewConstraint(v.Attribute, v.Operator, v.Value))
+		}
+	}
+
 	for _, tg := range d.job.TaskGroups {
 		if !(*tg.Name == d.service || *tg.Name == "services") {
 			continue

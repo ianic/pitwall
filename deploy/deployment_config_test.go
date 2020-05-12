@@ -76,4 +76,11 @@ func TestLoadServiceParams(t *testing.T) {
 	assert.Len(t, svc.Volumes, 2)
 	assert.Equal(t, "name-of-the-volume1:/path/in/container1", svc.Volumes[0])
 	assert.Equal(t, "name-of-the-volume2:/path/in/container2", svc.Volumes[1])
+
+	assert.Len(t, svc.Constraints, 1)
+	c, exists := svc.Constraints["constraint"]
+	assert.True(t, exists)
+	assert.Equal(t, "att", c.Attribute)
+	assert.Equal(t, "op", c.Operator)
+	assert.Equal(t, "val", c.Value)
 }
